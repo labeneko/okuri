@@ -34,7 +34,7 @@ jobs:
           month=`TZ=Asia/Tokyo date '+%m'`
           date=`TZ=Asia/Tokyo date '+%d'`
           savepath="images/$year/$month/$date/$now.jpg"
-          url="https://www.ktr.mlit.go.jp/keihin/webcam/cam_daimaru_dam_lower.jpg?${now}"
+          url="https://www.ktr.mlit.go.jp/keihin/webcam/cam_houon-bridge_OBS.jpg?${now}"
           mkdir -p "images"
           mkdir -p "images/${year}"
           mkdir -p "images/${year}/${month}"
