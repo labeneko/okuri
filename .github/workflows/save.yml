@@ -28,6 +28,9 @@ jobs:
       - name: install
         run: yarn install
       - name: Commit files
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           now=`TZ=Asia/Tokyo date '+%Y%m%d%H%M'`
           year=`TZ=Asia/Tokyo date '+%Y'`
@@ -41,9 +44,7 @@ jobs:
           mkdir -p "images/${year}/${month}/${date}"
           curl -o $savepath $url
           currentmd5=`md5sum $savepath | awk '{ print $1 }'`
-          previousimagepath=`tail -n 1 images/24h.txt`
-          previousimagepath="${previousimagepath//okuri\//}"
-          previousmd5=`md5sum ${previousimagepath} | awk '{ print $1 }'`
+          previousmd5=`md5sum latest.jpg | awk '{ print $1 }'`
           echo $currentmd5
           echo $previousmd5
           if [[ $currentmd5 != $previousmd5 ]]; then tail -n 143 images/24h.txt >> images/24hp.txt; fi
@@ -53,6 +54,10 @@ jobs:
           if [[ $currentmd5 != $previousmd5 ]]; then echo "okuri/$savepath" >> "images/24h.txt"; fi
           if [[ $currentmd5 != $previousmd5 ]]; then echo "okuri/$savepath" >> "images/${year}/${month}/${date}/images.txt"; fi
           if [[ $currentmd5 == $previousmd5 ]]; then rm $savepath ; fi
+          aws configure set default.s3.max_concurrent_requests 100
+          aws configure set default.s3.max_queue_size 10000
+          aws s3 sync --region ap-northeast-1 ./ s3://liver-camera/okuri/
+          find ./ | grep -E "[0-9]+.jpg" | xargs rm -f
           git config --local user.email "info@laboneko.jp"
           git config --local user.name "labeneko"
           git add .
