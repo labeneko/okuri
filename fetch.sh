@@ -9,6 +9,7 @@ reponames[1]="daimaru"
 urls[1]="https://www.ktr.mlit.go.jp/keihin/webcam/cam_daimaru_dam_lower.jpg?${now}"
 
 for i in ${!reponames[@]}
+do
   reponame=${reponames[i]}
   url=${reponames[i]}
   savepath="$reponame/images/$year/$month/$date/$now.jpg"
@@ -34,5 +35,5 @@ for i in ${!reponames[@]}
   aws s3 cp --region ap-northeast-1 "$reponame/latest.jpg" "s3://liver-camera/${reponame}/latest.jpg"
   aws s3 cp --region ap-northeast-1 "$reponame/images/24h.txt" "s3://liver-camera/${reponame}/images/24h.txt"
   aws s3 cp --region ap-northeast-1 "$reponame/images/${year}/${month}/${date}/images.txt" "s3://liver-camera/${reponame}/images/${year}/${month}/${date}/images.txt"
-do
+done
 find ./ | grep -E "[0-9]+.jpg" | xargs rm -f
