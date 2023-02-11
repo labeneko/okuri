@@ -13,7 +13,7 @@ mkdir -p "$reponame/images/${year}/${month}/${date}"
 curl -o $savepath $url
 jpegoptim --max=70 $savepath
 currentmd5=`md5sum $savepath | awk '{ print $1 }'`
-previousmd5=`md5sum latest.jpg | awk '{ print $1 }'`
+previousmd5=`md5sum "$reponame/latest.jpg" | awk '{ print $1 }'`
 echo $currentmd5
 echo $previousmd5
 if [[ $currentmd5 != $previousmd5 ]]; then tail -n 143 "$reponame/images/24h.txt" >> "$reponame/images/24hp.txt"; fi
