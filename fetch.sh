@@ -2,8 +2,14 @@ now=`TZ=Asia/Tokyo date '+%Y%m%d%H%M'`
 year=`TZ=Asia/Tokyo date '+%Y'`
 month=`TZ=Asia/Tokyo date '+%m'`
 date=`TZ=Asia/Tokyo date '+%d'`
+
 reponames[0]="okuri"
 urls[0]="https://www.ktr.mlit.go.jp/keihin/webcam/cam_houon-bridge_OBS.jpg?${now}"
+
+reponames[1]="daimaru"
+urls[1]="https://www.ktr.mlit.go.jp/keihin/webcam/cam_daimaru_dam_lower.jpg?${now}"
+
+
 for i in ${!reponames[@]}
   reponame=${reponames[i]}
   url=${reponames[i]}
