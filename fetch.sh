@@ -11,7 +11,7 @@ urls[1]="https://www.ktr.mlit.go.jp/keihin/webcam/cam_daimaru_dam_lower.jpg?${no
 for i in ${!reponames[@]}
 do
   reponame=${reponames[i]}
-  url=${reponames[i]}
+  url=${urls[i]}
   savepath="$reponame/images/$year/$month/$date/$now.jpg"
   mkdir -p "$reponame"
   mkdir -p "$reponame/images"
