@@ -90,7 +90,7 @@ do
   cp "$reponame/images/24hp.txt" "$reponame/images/24h.txt"
   cp $savepath "$reponame/latest.jpg"
   rm "$reponame/images/24hp.txt"
-  echo "$savepath" >> "$reponame/images/24h.txt"; fi
+  echo "$savepath" >> "$reponame/images/24h.txt";
   echo "$savepath" >> "$reponame/images/${year}/${month}/${date}/images.txt"
   aws s3 cp --region ap-northeast-1 $savepath "s3://liver-camera/${savepath}"
   aws s3 cp --region ap-northeast-1 "$reponame/latest.jpg" "s3://liver-camera/${reponame}/latest.jpg"
